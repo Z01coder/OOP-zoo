@@ -14,3 +14,77 @@
 Попробуйте добавить дополнительные функции в вашу программу, такие как сохранение информации о зоопарке в файл
 и возможность её загрузки, чтобы у вашего зоопарка было "постоянное состояние" между запусками программы.
 """
+
+
+class Animal:  # базовый класс Animal
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def make_sound(self):
+        pass
+
+    def eat(self):
+        print("Животное ест")
+
+
+class Bird(Animal):  # подкласс Bird
+    def make_sound(self):
+        return "Чирик-чирик!"
+
+
+class Mammal(Animal):  # подкласс Mammal
+    def make_sound(self):
+        return "Мяу!"
+
+
+class Reptile(Animal):  # подкласс Reptile
+    def make_sound(self):
+        return "Шшш!"
+
+
+def animal_sound(animals):  # функция для демонстрации полиморфизма
+    for animal in animals:
+        animal.make_sound()
+
+
+class Zoo:  # класс Zoo для композиции
+    def __init__(self):
+        self._animals = []
+        self._employees = []
+
+    def add_animal(self, animal):
+        self._animals.append(animal)
+
+    def get_animals(self):
+        return self._animals
+
+    def add_employee(self, employee):
+        self._employees.append(employee)
+
+    def get_employees(self):
+        return self._employees
+
+
+class ZooKeeper(object):  # класс для сотрудников
+    def feed_animal(self, animal):
+        animal.eat()
+
+
+class Veterinarian(object):  # ещё один класс для сотрудников
+    def heal_animal(self, animal):
+        pass
+
+# Пример использования
+
+
+zoo = Zoo()  # создание зоопарка
+bird = Bird("Воробей", 1)  # создание птицы
+mammal = Mammal("Кот", 2)  # создание млекопитающего
+reptile = Reptile("Змея", 3)  # создание рептилии
+
+zoo.add_animal(bird)  # добавление животных в зоопарк
+zoo.add_animal(mammal)
+zoo.add_animal(reptile)
+
+animal_sound([bird, mammal, reptile])  # демонстрация
