@@ -16,6 +16,9 @@
 """
 
 
+import json
+
+
 class Animal:
     def __init__(self, name, age):
         self.name = name
@@ -86,6 +89,28 @@ class Zoo:
         for employee in self.employees:
             print(f"{employee.name} ({employee.__class__.__name__})")
 
+    def save_state(self, filepath):
+        with open(filepath, 'w') as f:
+            data = {'animals': [], 'employees': []}
+            data['animals'] = [{'name': a.name, 'age': a.age, 'species': a.__class__.__name__} for a in self.animals]
+            data['employees'] = [{'name': e.name, 'type': e.__class__.__name__} for e in self.employees]
+            json.dump(data, f, indent=4)
+
+    def load_state(self, filepath):
+        try:
+            with open(filepath, 'r') as f:
+                data = json.load(f)
+        except FileNotFoundError:
+            return
+
+        for d in data['animals']:
+            species = eval(d['species'])
+            self.add_animal(species(d['name'], int(d['age'])))
+
+        for d in data['employees']:
+            type_ = eval(d['type'])
+            self.add_employee(type_(d['name']))
+
 
 class ZooKeeper:
     def __init__(self, name):
@@ -93,6 +118,22 @@ class ZooKeeper:
 
     def feed_animal(self, animal):
         print(f"{self.name} feeds {animal.name}.")
+
+# Пример использования
+
+
+if __name__ == "__main__":
+    import os
+    filename = 'zoo_data.json'
+
+    # Загружаем данные, если файл существует
+    if os.path.exists(filename):
+        zoo = Zoo()
+        zoo.load_state(filename)
+    else:
+        bird = Bird('Tweety', 10, 'small')
+        mammal = Mammal('Lion', 7, 'golden')
+        reptile = Reptile('Snake', 5, 'green')
 
 
 class Veterinarian:
@@ -129,3 +170,6 @@ animal_sound(animal_list)
 
 keeper.feed_animal(bird)
 veterinarian.heal_animal(mammal)
+
+# Сохраняем текущее состояние зоопарка
+zoo.save_state(filename)

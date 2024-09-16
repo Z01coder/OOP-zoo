@@ -1,0 +1,29 @@
+{
+    "animals": [
+        {
+            "name": "Tweety",
+            "age": 10,
+            "species": "Bird"
+        },
+        {
+            "name": "Lion",
+            "age": 7,
+            "species": "Mammal"
+        },
+        {
+            "name": "Snake",
+            "age": 5,
+            "species": "Reptile"
+        }
+    ],
+    "employees": [
+        {
+            "name": "Joe",
+            "type": "ZooKeeper"
+        },
+        {
+            "name": "Dr. Alex",
+            "type": "Veterinarian"
+        }
+    ]
+}
