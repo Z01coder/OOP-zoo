@@ -16,8 +16,8 @@
 """
 
 
-import pickle
 
+import pickle
 
 class Animal:  # базовый класс Animal
     def __init__(self, name, age):
@@ -68,6 +68,7 @@ class Zoo:  # класс Zoo для композиции
     def get_employees(self):
         return self._employees
 
+
     def save_to_file(self, filename):
         with open(filename, 'wb') as file:
             pickle.dump(self, file)
@@ -88,3 +89,19 @@ class ZooKeeper(object):  # класс для сотрудников
 class Veterinarian(object):  # ещё один класс для сотрудников
     def heal_animal(self, animal):
         pass
+
+
+# Пример использования
+
+
+zoo = Zoo()  # создание зоопарка
+bird = Bird("Воробей", 1)  # создание птицы
+mammal = Mammal("Кот", 2)  # создание млекопитающего
+reptile = Reptile("Змея", 3)  # создание рептилии
+
+zoo.add_animal(bird)  # добавление животных в зоопарк
+zoo.add_animal(mammal)
+zoo.add_animal(reptile)
+
+animal_sound([bird, mammal, reptile])  # демонстрация
+
