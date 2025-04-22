@@ -39,4 +39,22 @@
    ```bash
    git clone https://github.com/Z01coder/OOP-zoo.git
    cd OOP-zoo
-   
+
+2. **Запуск проекта**:
+   ```bash
+   python main.py
+
+3. **Пример кода**:
+	```bash
+from main import User, Admin
+
+# Создание обычного пользователя
+user1 = User(id=1, name="John Doe")
+print(f"User ID: {user1.id}, Name: {user1.name}, Access Level: {user1.access_level}")
+
+# Создание администратора
+admin = Admin(id=2, name="Jane Admin", access_level="admin")
+print(f"Admin ID: {admin.id}, Name: {admin.name}, Access Level: {admin.access_level}")
+
+# Добавление пользователя через администратора
+admin.add_user(user1)
