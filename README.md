@@ -45,7 +45,7 @@
    python main.py
 
 3. **Пример кода**:
-	```bash
+```bash
 from main import User, Admin
 
 # Создание обычного пользователя
